@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add Game</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+</head>
+<body>
+<h1>Add Game</h1>
+<form action="#" th:action="@{/games/post}" method="POST"></form>
+
+<form action="#" th:action="@{/games/post}" method="post">
+    <p>Title: <input type="text" name="title"  /></p>
+    <p>Price: <input type="text" name="price" /></p>
+    <p>Image: </p><input type="file" name="file" /><br/><br/>
+    <p>Link: <input type="text" name="link" /></p>
+    <p>Platform <select name="platform">
+        <option value="PS4">PS4</option>
+        <option value="XBOX One">Xbox One</option>
+    </select></p>
+    <p> <input type="text" name="" /></p>
+
+    <div class="input-field">
+        <input name="q" type="search" placeholder="Search all gifs..." required="required" autocomplete="off"/>
+        <i class="material-icons">search</i>
+    </div>
+
+
+    <p><input type="submit" value="Submit" /></p>
+</form>
+</body>
+</html>
