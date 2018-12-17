@@ -1,19 +1,16 @@
 package com.example.easynotes.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
+import org.springframework.web.multipart.MultipartFile;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.time.LocalDateTime;
+import java.util.Date;
+import java.util.List;
 
 @Entity
-@Getter
-@Setter
-@AllArgsConstructor
+@Data
 public class Game {
 
     @Id
@@ -25,9 +22,18 @@ public class Game {
 
     private Double price;
 
-    private String imageUrl;
-
+    @Size(max = 250)
     private String link;
 
+    @Size(max = 50)
     private String platform;
+
+    @Lob
+    @Column(name="image")
+    private byte[] image;
+
+    private LocalDateTime createDate;
+
+    @Size(max = 2500)
+    private String description;
 }
