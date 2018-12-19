@@ -1,13 +1,11 @@
 package com.example.easynotes.model;
 
 import lombok.Data;
-import org.springframework.web.multipart.MultipartFile;
+import org.hibernate.validator.constraints.URL;
 
 import javax.persistence.*;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.time.LocalDateTime;
-import java.util.Date;
-import java.util.List;
 
 @Entity
 @Data
@@ -18,15 +16,20 @@ public class Game {
     private Long id;
 
     @Size(max = 250)
+    @NotNull( message = "Please enter a title")
     private String title;
 
+    @Digits(integer=6, fraction=2, message = "Please enter a valid price")
+    @NotNull( message = "Please enter a price")
     private Double price;
 
-    @Size(max = 250)
+    @Size(max = 750)
+    @URL
     private String link;
 
-    @Size(max = 50)
-    private String platform;
+    @ManyToOne
+    @JoinColumn(name = "platform_id", referencedColumnName="id", nullable=false, unique=false )
+    private Platform platform;
 
     @Lob
     @Column(name="image")
