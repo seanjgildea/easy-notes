@@ -3,24 +3,20 @@ package com.example.easynotes.model;
 import lombok.Data;
 
 import javax.persistence.*;
-import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import java.util.Collection;
 
 @Entity
 @Data
-public class Login {
+public class Role {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull
-    @Size(min = 2, max = 30)
-    private String userName;
-
-    @NotNull
-    @Size( max = 100)
-    private String password;
+    @NotEmpty
+    private String name;
 
 }

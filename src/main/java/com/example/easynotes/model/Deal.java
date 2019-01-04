@@ -4,12 +4,14 @@ import lombok.Data;
 import org.hibernate.validator.constraints.URL;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
 @Entity
 @Data
-public class Game {
+public class Deal {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,11 +29,6 @@ public class Game {
     @URL
     private String link;
 
-    @ManyToOne
-    @NotNull
-    @JoinColumn(name = "platform_id", referencedColumnName="id", nullable=false, unique=false )
-    private Platform platform;
-
     @Lob
     @Column(name="image")
     private byte[] image;
@@ -46,4 +43,9 @@ public class Game {
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName="id", nullable=false, unique=false )
     private User user;
+
+    @ManyToOne
+    @NotNull
+    @JoinColumn(name = "category_id", referencedColumnName="id", nullable=false, unique=false )
+    private Category category;
 }
