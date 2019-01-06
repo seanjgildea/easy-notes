@@ -32,6 +32,8 @@ public class IndexController {
         logger.warn("A WARN Message");
         logger.error("An ERROR Message");
 
+
+
         return "login";
     }
 
