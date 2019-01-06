@@ -5,10 +5,13 @@ import com.example.easynotes.model.Login;
 import com.example.easynotes.model.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -16,6 +19,9 @@ import javax.validation.Valid;
 
 @RestController
 public class IndexController {
+
+    @Autowired
+    RestTemplate restTemplate;
 
     Logger logger = LoggerFactory.getLogger(IndexController.class);
 
@@ -32,6 +38,9 @@ public class IndexController {
 
     @RequestMapping("/hello")
     public String hello(Model model, @RequestParam(value="name", required=false, defaultValue="World") String name) {
+
+
+
         model.addAttribute("name", name);
         return "hello";
     }
