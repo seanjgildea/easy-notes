@@ -23,7 +23,7 @@ public class RestTemplateHeaderModifierInterceptor implements ClientHttpRequestI
     public ClientHttpResponse intercept(HttpRequest httpRequest, byte[] bytes, ClientHttpRequestExecution clientHttpRequestExecution) throws IOException {
 
         ClientHttpResponse resp = clientHttpRequestExecution.execute(httpRequest, bytes);
-        resp.getHeaders().add("headerName", globalProperties.getGlobalHeader() );
+        //resp.getHeaders().add("headerName", globalProperties.getGlobalHeader() ); //cannot find symbol
         return resp;
     }
 }

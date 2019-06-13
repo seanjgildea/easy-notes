@@ -1,9 +1,11 @@
 package com.example.easynotes.controller;
 
+import com.example.easynotes.consts.Constants;
 import com.example.easynotes.model.Game;
 import com.example.easynotes.model.Platform;
 import com.example.easynotes.repository.GameRepository;
 import com.example.easynotes.repository.PlatformRepository;
+import javassist.bytecode.stackmap.TypeData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,12 +15,13 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.logging.Logger;
 
 @Controller()
 public class GameController {
 
-    public static final String VIEW_GAMES_URL = "viewGames";
-    public static final String ADD_EDIT_GAMES_URL = "addEditGame";
+    private static final Logger log = Logger.getLogger(GameController.class.getName());
+
 
     @Autowired
     GameRepository gameRepository;
@@ -29,7 +32,7 @@ public class GameController {
     @GetMapping("/")
     public String getGames(Model model) {
         model.addAttribute("games", gameRepository.findAllByOrderByCreateDateDesc());
-        return VIEW_GAMES_URL;
+        return Constants.VIEW_GAMES_URL;
     }
 
     @GetMapping("/game/add")
@@ -37,25 +40,25 @@ public class GameController {
         List<Platform> platforms = platformRepository.findAll();
         model.addAttribute("platforms", platforms);
         model.addAttribute("pageTitle", "Add ");
-        return ADD_EDIT_GAMES_URL;
+        return Constants.ADD_EDIT_GAMES_URL;
     }
 
     @PostMapping("/game/add")
-    public String postGame(@Valid @ModelAttribute("command") Game command, BindingResult bindingResult, Model model) {
+    public String postGame(@Valid @ModelAttribute("command") Game game, BindingResult bindingResult, Model model) {
 
         if (bindingResult.hasErrors()) {
 
             bindingResult.getAllErrors().forEach(objectError -> {
-                System.out.println(objectError.toString());
+                log.info(objectError.toString());
             });
 
             List<Platform> platforms = platformRepository.findAll();
             model.addAttribute("platforms", platforms);
-            return ADD_EDIT_GAMES_URL;
+            return Constants.ADD_EDIT_GAMES_URL;
         }
 
-        command.setCreateDate(LocalDateTime.now());
-        gameRepository.save(command);
+        game.setCreateDate(LocalDateTime.now());
+        gameRepository.save(game);
         return getGames(model);
     }
 
@@ -68,14 +71,14 @@ public class GameController {
         List<Platform> platforms = platformRepository.findAll();
         model.addAttribute("platforms", platforms);
         model.addAttribute("pageTitle", "Edit ");
-        return ADD_EDIT_GAMES_URL;
+        return Constants.ADD_EDIT_GAMES_URL;
     }
 
     @PostMapping("/game/update/{id}")
     public String updateGame(@PathVariable("id") Long id, @Valid Game game, BindingResult result, Model model) {
         if (result.hasErrors()) {
             game.setId(id);
-            return ADD_EDIT_GAMES_URL;
+            return Constants.ADD_EDIT_GAMES_URL;
         }
 
         if ( game.getCreateDate() == null ) {
@@ -90,25 +93,25 @@ public class GameController {
     @GetMapping("/game/search")
     public String searchTitle(Model model, String title) {
         model.addAttribute("games", gameRepository.findByTitleContaining(title));
-        return VIEW_GAMES_URL;
+        return Constants.VIEW_GAMES_URL;
     }
 
     @GetMapping("/game/priceSort")
     public String sortByPrice(Model model) {
         model.addAttribute("games", gameRepository.findAllByOrderByPriceAsc());
-        return VIEW_GAMES_URL;
+        return Constants.VIEW_GAMES_URL;
     }
 
     @GetMapping("/game/titleSort")
     public String sortByTitle(Model model) {
         model.addAttribute("games", gameRepository.findAllByOrderByTitleAsc());
-        return VIEW_GAMES_URL;
+        return Constants.VIEW_GAMES_URL;
     }
 
     @GetMapping("/game/platformSort")
     public String sortByPlatform(Model model) {
         model.addAttribute("games", gameRepository.findAllByOrderByPlatformAsc());
-        return VIEW_GAMES_URL;
+        return Constants.VIEW_GAMES_URL;
     }
 
 
