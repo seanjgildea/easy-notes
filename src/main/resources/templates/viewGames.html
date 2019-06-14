@@ -10,11 +10,7 @@
 
 <div class="container-fluid">
 
-    <h1 th:inline="text">View Games! [[${#httpServletRequest.remoteUser}]]!</h1>
 
-    <form th:action="@{/logout}" method="post">
-        <input type="submit" value="Sign Out"/>
-    </form>
 
     <div class="row col-md-12 table-responsive">
         <table class="table">

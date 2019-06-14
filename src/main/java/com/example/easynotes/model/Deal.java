@@ -37,10 +37,6 @@ public class Deal {
     @NotNull
     private String description;
 
-    @NotNull
-    @ManyToOne
-    @JoinColumn(name = "user_id", referencedColumnName="id", nullable=false, unique=false )
-    private User user;
 
     @ManyToOne
     @NotNull
@@ -103,13 +99,6 @@ public class Deal {
         this.description = description;
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
 
     public Category getCategory() {
         return category;

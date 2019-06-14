@@ -50,10 +50,6 @@ public class Game {
     @JsonProperty("body")
     private String description;
 
-    @NotNull
-    @ManyToOne
-    @JoinColumn(name = "user_id", referencedColumnName="id", nullable=false, unique=false )
-    private User user;
 
     public Long getId() {
         return id;
@@ -127,11 +123,4 @@ public class Game {
         this.description = description;
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
 }

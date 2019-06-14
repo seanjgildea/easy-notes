@@ -19,8 +19,6 @@ public class EasyNotesApplication extends WebMvcConfigurationSupport {
 		registry.addViewController("/game/add").setViewName(Constants.ADD_EDIT_GAMES_URL);
 		registry.addViewController("/game/edit").setViewName(Constants.ADD_EDIT_GAMES_URL);
 		registry.addViewController("/").setViewName(Constants.VIEW_GAMES_URL);
-		registry.addViewController("/user/register").setViewName("register.html");
-		registry.addViewController("/login").setViewName("login.html");
 	}
 
 	@Override
