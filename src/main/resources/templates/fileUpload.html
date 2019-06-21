@@ -8,8 +8,20 @@
 
 <div class="container-fluid">
 
+    <div th:if="${message != null}" th:text="Yes, variable exists!">
+        I wonder, if variable exists...
+    </div>
+
     <form method="POST" action="/file/upload" enctype="multipart/form-data">
         <table>
+            <tr>
+                <td>Name</td>
+                <td><input type="text" name="name" /></td>
+            </tr>
+            <tr>
+                <td>Email</td>
+                <td><input type="text" name="email" /></td>
+            </tr>
             <tr>
                 <td><label path="file">Select a file to upload</label></td>
                 <td><input type="file" name="file" /></td>
@@ -18,7 +30,11 @@
                 <td><input type="submit" value="Submit" /></td>
             </tr>
         </table>
-        </form>
+    </form>
+
+
+
+
 
 </div>
 
